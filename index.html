@@ -1,1 +1,2029 @@
-<!DOCTYPE html><html lang=en><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><link rel=icon href=favicon.ico><title>xs</title><link href=css/chunk-29643578.ba4db267.css rel=prefetch><link href=css/chunk-64721bb8.1694b0be.css rel=prefetch><link href=css/chunk-9316ec5c.b5796a23.css rel=prefetch><link href=css/chunk-afc28d64.44f36408.css rel=prefetch><link href=css/chunk-da5ef964.765b93a2.css rel=prefetch><link href=js/chunk-29643578.32645a96.js rel=prefetch><link href=js/chunk-2d207bd4.50d8c0f3.js rel=prefetch><link href=js/chunk-64721bb8.e4b59b84.js rel=prefetch><link href=js/chunk-9316ec5c.bf162b6b.js rel=prefetch><link href=js/chunk-afc28d64.78dcd17c.js rel=prefetch><link href=js/chunk-da5ef964.c888ed90.js rel=prefetch><link href=css/app.daf6640a.css rel=preload as=style><link href=css/chunk-vendors.5c50d4e4.css rel=preload as=style><link href=js/app.03ba22ce.js rel=preload as=script><link href=js/chunk-vendors.a310a248.js rel=preload as=script><link href=css/chunk-vendors.5c50d4e4.css rel=stylesheet><link href=css/app.daf6640a.css rel=stylesheet></head><body><noscript><strong>We're sorry but xs doesn't work properly without JavaScript enabled. Please enable it to continue.</strong></noscript><div id=app></div><script src=js/chunk-vendors.a310a248.js></script><script src=js/app.03ba22ce.js></script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>蜗牛赛跑</title>
+	<link rel="stylesheet" href="css/reset.min.css">
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/jquery-ui.min.css">
+	<link rel="stylesheet" href="css/jquery.datetimepicker.min.css">
+	<link rel="stylesheet" href="css/jquery.Scrollbar.css">
+	<link rel="stylesheet" href="css/font.css">
+	<link rel="stylesheet" href="css/loading.css">
+	<link rel="stylesheet" href="css/ZgCreate.min.css">
+	<link rel="stylesheet" href="css/Page_mem.min.css">
+	<link rel="stylesheet" href="css/ZgWindow.min.css">
+	<link rel="stylesheet" href="css/custom.css">
+	<link rel="stylesheet" href="css/poker.css">
+	<link rel="stylesheet" href="css/stylesheet.css">
+	<link rel="stylesheet" href="css/reset.min.css">
+	<link rel="stylesheet" href="css/custom2.css">
+	<link rel="stylesheet" href="css/style-desktop.css">
+	<link rel="stylesheet" href="css/VDNLottery.css">
+
+	<style>
+		.SnailRacemain {
+			width: 1024px;
+			margin: 0 auto;
+		}
+
+		.bet_class {
+			border: 1px #CCC solid;
+			margin-top: 10px;
+		}
+
+		.bet_class>.title {
+			border-bottom: 1px #CCC solid;
+			padding: 3px 10px;
+		}
+
+		#LotteryCode {
+			position: absolute;
+			right: 0;
+			bottom: 0;
+		}
+
+		.confirm-tr+.confirm-tr div {
+			border-top: 1px solid #e4e4e4;
+		}
+
+		.confirm-tr .confirm-td {
+			display: inline-block;
+			width: 188px;
+			padding: 0 15px;
+			text-align: left;
+			font-family: arial, 'Microsoft JhengHei';
+			font-size: 14px;
+			color: #1f1f1f;
+		}
+
+		.confirm-tr .confirm-td:first-child {
+			width: 120px;
+			text-align: center
+		}
+
+		.confirm-tr .confirm-td+.confirm-td {
+			border-left: 1px solid #e4e4e4;
+		}
+
+		.Money_ul>li {
+			padding: 6px 0;
+		}
+
+		.record_dep_closet .cancelBtn {
+			position: absolute;
+			right: 33px;
+			top: 0px;
+		}
+
+		.icon-13 {
+			display: none;
+		}
+
+		.order_search.btn-red {
+			border: 0;
+		}
+
+		.order_search:hover {
+			color: #FFF;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="snail-content">
+		<header id="game-head" style="display:none;">
+			<div class="logo"><img src="../images/logo.png" alt=""></div>
+			<div class="game-head-main">
+				<div class="game-head-info">
+					<span class="head-info-ico"></span>
+					<span id="MemberAct"> 123456 </span>
+					<span class="head-info-Money">余额</span>
+					<span id="MemberMoney">0</span>
+				</div>
+				<div class="game-head-operat">
+					<span id="GoWayvalue" class="ButtonAudio"></span>
+					<span id="GoStatistics" class="ButtonAudio"></span>
+					<span id="GoExplanation" class="ButtonAudio"></span>
+					<span class="sound-effects" data-toggle="tooltip" data-placement="bottom"></span>
+					<span class="sound-switch" data-toggle="tooltip" data-placement="bottom"></span>
+				</div>
+			</div>
+			<ul class="game-head-inquire" style="float: right;">
+				<li id="GoOrder" class="ButtonAudio" data-toggle="tooltip" data-placement="bottom" title="订单管理"></li>
+				<li id="GoReport" class="ButtonAudio" data-toggle="tooltip" data-placement="bottom" title="投注报表"></li>
+				<li id="GoLottery" class="ButtonAudio" data-toggle="tooltip" data-placement="bottom" title="开奖结果"></li>
+				<li id="GoTrend" class="ButtonAudio" data-toggle="tooltip" data-placement="bottom" title="走势图"></li>
+			</ul>
+		</header>
+
+		<div id="GameDiv" style="width:1024px; height: 530px;">
+			<div id="GameCanvasDiv"></div>
+			<div id="splash">
+				<div class="progress-bar stripes">
+					<span style="width: 0%"></span>
+				</div>
+			</div>
+		</div>
+
+		<div id="game-basic" class="game-mode" style="z-index:3;">
+			<div class="left-outer">
+				<div class="title-wrap"></div>
+
+				<!-- 選期數 -->
+				<div class="periods">
+					<select name="basic_ToDayPeriods" id="basic-number" class="ToDayPeriods">
+						<option selected="selected"> - </option>
+					</select>
+				</div>
+
+				<!-- 歷史資料 -->
+				<div class="history-buy">
+					<ul>
+						<li>
+							<div class="name">红</div>
+							<div class="bet-money BetMoney Play_209_1_money">0</div>
+						</li>
+						<li>
+							<div class="name">绿</div>
+							<div class="bet-money BetMoney Play_209_2_money">0</div>
+						</li>
+						<li>
+							<div class="name">蓝</div>
+							<div class="bet-money BetMoney Play_209_3_money">0</div>
+						</li>
+						<li class="total last">
+							<div class="name">总投注</div>
+							<div class="bet-money BetMoney TotalBetMoney">0</div>
+						</li>
+						<li class="last">
+							<div class="name">盈余</div>
+							<div class="bet-money BetMoney TotalWinMoney ">0</div>
+						</li>
+					</ul>
+				</div>
+				<!-- 歷史資料 End-->
+			</div>
+
+			<div class="right-outer">
+				<div class="title-wrap">
+					<div class="official-data-inner">
+						<div class="count-time PeriodsCloseTime">00:00:00</div>
+					</div>
+					<div class="official-data-inner">
+						<div class="current-period NowPeriodsNumber"></div>
+					</div>
+				</div>
+
+				<div class="racer-wrap">
+					<ul>
+						<li>
+							<i class="snails snails-snailA_115"></i>
+							<div class="bet-chart-inner clearfix">
+								<ul>
+									<li class="win_Snail_1" data-num="0">0%</li>
+									<li class="Distribution_Snail_1" data-num="0">0%</li>
+									<li class="Play_209_ods">2.91</li>
+								</ul>
+							</div>
+							<div class="money-enter">
+								<input type="text" value="0" class="cbet-money numf" data-play="209" data-bet_content="1">
+							</div>
+						</li>
+						<li>
+							<i class="snails snails-snailB_115"></i>
+							<div class="bet-chart-inner clearfix">
+								<ul>
+									<li class="win_Snail_2" data-num="0">0%</li>
+									<li class="Distribution_Snail_2" data-num="0">0%</li>
+									<li class="Play_209_ods">2.91</li>
+								</ul>
+							</div>
+							<div class="money-enter">
+								<input type="text" value="0" class="cbet-money numf" data-play="209" data-bet_content="2">
+							</div>
+						</li>
+						<li>
+							<i class="snails snails-snailC_115"></i>
+							<div class="bet-chart-inner clearfix">
+								<ul>
+									<li class="win_Snail_3" data-num="0">0%</li>
+									<li class="Distribution_Snail_3" data-num="0">0%</li>
+									<li class="Play_209_ods">2.91</li>
+								</ul>
+							</div>
+							<div class="money-enter">
+								<input type="text" value="0" class="cbet-money numf" data-play="209" data-bet_content="3">
+							</div>
+						</li>
+					</ul>
+				</div>
+
+				<div class="final-wrap">
+					<div class="sum-money-inner">
+						<div class="sum-money">
+							<input type="text" value="0" readonly class="total-Betting">
+						</div>
+					</div>
+					<div class="final-btn clearfix">
+						<div class="sure-btn BetBtn ButtonAudio" id="BetBtn" name="BetBtn"></div>
+						<div class="cancel-btn ResetBet ButtonAudio"></div>
+					</div>
+					<div class="change-level-btn game-mode-switch ButtonAudio"></div>
+				</div>
+			</div>
+		</div>
+		<div id="game-advance" class="clearfix game-mode" style="z-index:3;">
+			<section class="pull-left">
+				<fieldset class="period">
+					<select name="advance_ToDayPeriods" id="advance-number" class="ToDayPeriods">
+						<option selected="selected"> - </option>
+					</select>
+				</fieldset>
+				<div class="betSlip scroll-y">
+					<ul>
+						<li>
+							<h6>冠军</h6>
+							<p>红<span class="BetMoney Play_209_1_money">0</span></p>
+							<p>绿<span class="BetMoney Play_209_2_money">0</span></p>
+							<p>蓝<span class="BetMoney Play_209_3_money">0</span></p>
+						</li>
+						<li>
+							<h6>冠亚军</h6>
+							<p>红<span class="BetMoney Play_210_1_money">0</span></p>
+							<p>绿<span class="BetMoney Play_210_2_money">0</span></p>
+							<p>蓝<span class="BetMoney Play_210_3_money">0</span></p>
+						</li>
+						<li>
+							<h6>冠亚季军</h6>
+							<p>红绿蓝<span class="BetMoney Play_211_123_money">0</span></p>
+							<p>绿红蓝<span class="BetMoney Play_211_213_money">0</span></p>
+							<p>蓝红绿<span class="BetMoney Play_211_312_money">10</span></p>
+							<p>红蓝绿<span class="BetMoney Play_211_132_money">0</span></p>
+							<p>绿蓝红<span class="BetMoney Play_211_231_money">0</span></p>
+							<p>蓝绿红<span class="BetMoney Play_211_321_money">0</span></p>
+						</li>
+						<li>
+							<p>总投注<span class="BetMoney TotalBetMoney">0</span></p>
+							<p>盈余<span class="BetMoney TotalWinMoney">0</span></p>
+						</li>
+					</ul>
+				</div>
+			</section>
+			<section class="pull-right">
+				<div class="info row">
+					<span class="PeriodsCloseTime" id="PeriodsCloseTime">00:00:00</span>
+					<span class="NowPeriodsNumber">-- loading --</span>
+				</div>
+				<div class="bet row">
+					<div class="col-xs-6">
+						<h6 class="txt-bg"><span class="button button-advance-txt-win"></span></h6>
+						<ul class="list-win">
+							<li>
+								<div class="snails snails-snailA_80"></div>
+								<span class="win_Snail_1" data-num="0">0%</span>
+							</li>
+							<li>
+								<div class="snails snails-snailB_80"></div>
+								<span class="win_Snail_2" data-num="0">0%</span>
+							</li>
+							<li>
+								<div class="snails snails-snailC_80"></div>
+								<span class="win_Snail_3" data-num="0">0%</span>
+							</li>
+						</ul>
+					</div>
+					<div class="col-xs-6">
+						<h6 class="txt-bg"><span class="button button-advance-txt-bet"></span></h6>
+						<ul class="list-bet">
+							<li>
+								<div class="snails snails-snailA_80"></div>
+								<span class="Distribution_Snail_1" data-num="0">0%</span>
+							</li>
+							<li>
+								<div class="snails snails-snailB_80"></div>
+								<span class="Distribution_Snail_2" data-num="0">0%</span>
+							</li>
+							<li>
+								<div class="snails snails-snailC_80"></div>
+								<span class="Distribution_Snail_3" data-num="0">0%</span>
+							</li>
+						</ul>
+					</div>
+					<div class="col-xs-6">
+						<h6 class="txt-bg"><span class="button button-advance-txt-first"></span> <b>赔率：<i
+									class="Play_209_ods">2.7</i></b></h6>
+						<ul class="list-frist">
+							<li>
+								<div class="snails snails-snailA_80"></div>
+								<input type="text" value="0" class="cbet-money numf" data-play="209" data-bet_content="1">
+							</li>
+							<li>
+								<div class="snails snails-snailB_80"></div>
+								<input type="text" value="0" class="cbet-money numf" data-play="209" data-bet_content="2">
+							</li>
+							<li>
+								<div class="snails snails-snailC_80"></div>
+								<input type="text" value="0" class="cbet-money numf" data-play="209" data-bet_content="3">
+							</li>
+						</ul>
+					</div>
+					<div class="col-xs-6">
+						<h6 class="txt-bg"><span class="button button-advance-txt-second"></span> <b>赔率：<i
+									class="Play_210_ods">1.9</i></b></h6>
+						<ul class="list-second">
+							<li>
+								<div class="snails snails-snailA_80"></div>
+								<input type="text" value="0" class="cbet-money numf" data-play="210" data-bet_content="1">
+							</li>
+							<li>
+								<div class="snails snails-snailB_80"></div>
+								<input type="text" value="0" class="cbet-money numf" data-play="210" data-bet_content="2">
+							</li>
+							<li>
+								<div class="snails snails-snailC_80"></div>
+								<input type="text" value="0" class="cbet-money numf" data-play="210" data-bet_content="3">
+							</li>
+						</ul>
+					</div>
+					<div class="col-xs-12">
+						<h6 class="txt-bg"><span class="button button-advance-txt-ranking"></span> <b>赔率：<i
+									class="Play_211_ods">5.5</i></b></h6>
+						<ul class="list-ranking">
+							<li>
+								<div class="snails snails-snailA_52"></div>
+								<div class="snails snails-snailB_52"></div>
+								<div class="snails snails-snailC_52"></div>
+								<input type="text" value="0" class="cbet-money numf" data-play="211" data-bet_content="1,2,3">
+							</li>
+							<li>
+								<div class="snails snails-snailB_52"></div>
+								<div class="snails snails-snailA_52"></div>
+								<div class="snails snails-snailC_52"></div>
+								<input type="text" value="0" class="cbet-money numf" data-play="211" data-bet_content="2,1,3">
+							</li>
+							<li>
+								<div class="snails snails-snailC_52"></div>
+								<div class="snails snails-snailA_52"></div>
+								<div class="snails snails-snailB_52"></div>
+								<input type="text" value="0" class="cbet-money numf" data-play="211" data-bet_content="3,1,2">
+							</li>
+							<li>
+								<div class="snails snails-snailA_52"></div>
+								<div class="snails snails-snailC_52"></div>
+								<div class="snails snails-snailB_52"></div>
+								<input type="text" value="0" class="cbet-money numf" data-play="211" data-bet_content="1,3,2">
+							</li>
+							<li>
+								<div class="snails snails-snailB_52"></div>
+								<div class="snails snails-snailC_52"></div>
+								<div class="snails snails-snailA_52"></div>
+								<input type="text" value="0" class="cbet-money numf" data-play="211" data-bet_content="2,3,1">
+							</li>
+							<li>
+								<div class="snails snails-snailC_52"></div>
+								<div class="snails snails-snailB_52"></div>
+								<div class="snails snails-snailA_52"></div>
+								<input type="text" value="0" class="cbet-money numf" data-play="211" data-bet_content="3,2,1">
+							</li>
+						</ul>
+					</div>
+					<div class="col-xs-12">
+						<div class="money-input">
+							<h6 class="txt-bg"><span class="button button-advance-txt-money"></span></h6>
+							<input type="text" value="0" readonly class="total-Betting">
+						</div>
+						<div class="btns">
+							<a class="button button-buA_01 BetBtn ButtonAudio" href="javascript:void(0);" id="BetBtn"
+								name="BetBtn"></a>
+							<a class="button button-buB_01 ResetBet ButtonAudio" href="javascript:void(0);"></a>
+							<a class="button button-buD_01 game-mode-switch ButtonAudio" href="javascript:void(0);"></a>
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+
+		<div id="game-betinfo" style="z-index:2;">
+			<strong class="now-period BetInfoForNow"> <i> - </i> 期</strong>
+			<ul class="list clearfix">
+				<li>
+					<h6>冠军</h6>
+					<p>红<span class="BetMoney Play_209_1_money">0</span></p>
+					<p>绿<span class="BetMoney Play_209_2_money">0</span></p>
+					<p>蓝<span class="BetMoney Play_209_3_money">0</span></p>
+				</li>
+				<li>
+					<h6>冠亚军</h6>
+					<p>红<span class="BetMoney Play_210_1_money">0</span></p>
+					<p>绿<span class="BetMoney Play_210_2_money">0</span></p>
+					<p>蓝<span class="BetMoney Play_210_3_money">0</span></p>
+				</li>
+				<li class="plural">
+					<h6>冠亚季军</h6>
+					<div>
+						<p>红绿蓝<span class="BetMoney Play_211_123_money">0</span></p>
+						<p>绿红蓝<span class="BetMoney Play_211_213_money">0</span></p>
+						<p>蓝红绿<span class="BetMoney Play_211_312_money">10</span></p>
+					</div>
+					<div>
+						<p>红蓝绿<span class="BetMoney Play_211_132_money">0</span></p>
+						<p>绿蓝红<span class="BetMoney Play_211_231_money">0</span></p>
+						<p>蓝绿红<span class="BetMoney Play_211_321_money">0</span></p>
+					</div>
+				</li>
+				<li class="total">
+					<h6>投注总额</h6>
+					<p>总投注<span class="BetMoney TotalBetMoney">0</span></p>
+					<p>盈余<span class="BetMoney TotalWinMoney">0</span></p>
+				</li>
+			</ul>
+		</div>
+
+		<div id="game-wating" style="z-index:1;">
+			<div class="current-period NowPeriodsNumber">-- loaging --</div>
+			<div class="game-wating-group">
+				<div class="snails-icon">
+					<i class="snails-icon-1"></i>
+				</div>
+				<div class="snails-percentage">
+					<span class="win_Snail_1" data-num="0">0%</span>
+				</div>
+				<div class="snails-bet">
+					<span class="snails-bet-percentage Distribution_Snail_1" data-num="0">0%</span>
+					<div class="snails-bet-bar">
+						<span class="bar-inner bar-inner-1"></span>
+					</div>
+				</div>
+			</div>
+			<div class="game-wating-group">
+				<div class="snails-icon">
+					<i class="snails-icon-2"></i>
+				</div>
+				<div class="snails-percentage">
+					<span class="win_Snail_2" data-num="0">0%</span>
+				</div>
+				<div class="snails-bet">
+					<span class="snails-bet-percentage Distribution_Snail_2" data-num="0">0%</span>
+					<div class="snails-bet-bar">
+						<span class="bar-inner bar-inner-2"></span>
+					</div>
+				</div>
+			</div>
+			<div class="game-wating-group">
+				<div class="snails-icon">
+					<i class="snails-icon-3"></i>
+				</div>
+				<div class="snails-percentage">
+					<span class="win_Snail_3" data-num="0">0%</span>
+				</div>
+				<div class="snails-bet">
+					<span class="snails-bet-percentage Distribution_Snail_3" data-num="0">0%</span>
+					<div class="snails-bet-bar">
+						<span class="bar-inner bar-inner-3"></span>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div id="game-podium" style="z-index:1;">
+			<div class="game-podium-first Win_1"><i class="snails snails-snailB"></i></div>
+			<div class="game-podium-second Win_2"><i class="snails snails-snailA"></i></div>
+			<div class="game-podium-third Win_3"><i class="snails snails-snailC"></i></div>
+		</div>
+
+		<div id="game-mask"></div>
+
+		<div class="maintain_content">
+			<div class="maintain_con">
+				<div class="maintain_area">
+					尊贵的会员您好:<br>
+					为了提供您更便捷快速的娱乐环境，<br>
+					目前正在进行网站维护作业，若有不便之处，敬请见谅。
+				</div>
+			</div>
+		</div>
+		<div class="game_close_content">
+			<div class="game_close_con">
+				<div class="game_close_area">
+					<!-- 					<div style="letter-spacing: 8px;">每日开奖时间<span style="color:#FF0">早上9点至隔日早上6点</span></div> -->
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="MoneyDialog" class="MoneyDialog">
+		<ul class="Money_ul">
+			<li>
+				<i class="fa fa-minus-square minus" data-money="1"></i>
+				<div>1</div>
+				<i class="fa fa-plus-square plus" data-money="1"></i>
+			</li>
+			<li>
+				<i class="fa fa-minus-square minus" data-money="5"></i>
+				<div>5</div>
+				<i class="fa fa-plus-square plus" data-money="5"></i>
+			</li>
+			<li>
+				<i class="fa fa-minus-square minus" data-money="10"></i>
+				<div>10</div>
+				<i class="fa fa-plus-square plus" data-money="10"></i>
+			</li>
+			<li>
+				<i class="fa fa-minus-square minus" data-money="50"></i>
+				<div>50</div>
+				<i class="fa fa-plus-square plus" data-money="50"></i>
+			</li>
+			<li>
+				<i class="fa fa-minus-square minus" data-money="100"></i>
+				<div>100</div>
+				<i class="fa fa-plus-square plus" data-money="100"></i>
+			</li>
+			<li>
+				<i class="fa fa-minus-square minus" data-money="500"></i>
+				<div>500</div>
+				<i class="fa fa-plus-square plus" data-money="500"></i>
+			</li>
+			<li>
+				<i class="fa fa-minus-square minus" data-money="1000"></i>
+				<div>1000</div>
+				<i class="fa fa-plus-square plus" data-money="1000"></i>
+			</li>
+		</ul>
+	</div>
+
+
+	<script src="js/jquery-3.1.0.min.js"></script>
+	<script src="js/jquery-migrate-3.0.0.min.js"></script>
+	<script src="js/jquery-ui.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/jquery.datetimepicker.min.js"></script>
+	<script src="js/jquery.Scrollbar.js"></script>
+	<script src="js/jquery.scrollbar.min.js"></script>
+	<!-- <script>
+	$.fn.datetimepicker.defaults.lang = "zh_cn";
+</script> -->
+	<script src="js/global.js"></script>
+	<script src="js/loading.js"></script>
+	<script src="js/ZgCreate.js"></script>
+	<script src="js/Page_mem.js"></script>
+	<script src="js/js_computing.min.js"></script>
+	<script src="js/ZgCountDown.js"></script>
+	<script src="js/ZgWindow.min.js"></script>
+	<script src="js/peasantcalendar.js"></script>
+	<script src="js/poker.js"></script>
+	<script src="js/zh_cn.js"></script>
+
+
+
+
+	<script src="js/ZgCreate2.js"></script>
+	<!--pixi-->
+	<script src="js/polyfill.js"></script>
+	<script src="js/pixi.bundle.min.js"></script>
+	<script src="js/snailrace.min.js"></script>
+	<script src="js/VDNLottery.js"></script>
+
+	<script>
+		SnailRace.config.assets_path = "/"
+	</script>
+	<!--線上人數-->
+	<script>
+		var IntoTime = 0;
+		var IntoTimer;
+		IntoTimer = setInterval(function () {
+			IntoTime++;
+		}, 1 * 1000);
+		var Online;
+		var OnlineFun = function () {
+			var $this = this;
+			var MemberInfo = false;
+			var NowTime = '20191219141934';
+			/*更新在線資訊*/
+			var UpdateOnline = function () {
+				var url = 'https://easy-mock.bookset.io/mock/5dbaca559e606017b5d2c8c5/example/Online';
+				var send = {
+					IntoTime: IntoTime,
+					NowTime: NowTime
+				}
+				ajax_get(url, send).always(function () {
+					setTimeout(function () {
+						UpdateOnline();
+					}, 10 * 1000)
+				}).done(function (rt) {
+					var fun = {}
+					fun["100"] = function (obj) { }
+					my_decode(rt, fun);
+				})
+			}
+			var init = function () {
+				if (typeof (NeedCheckOnline) != 'undefined') {
+					if (NeedCheckOnline === false) {
+						return false
+					}
+				}
+				UpdateOnline();
+			}
+			init();
+		}
+		$(document).ready(function () {
+			Online = new OnlineFun()
+		});	
+	</script>
+	<script>
+		var game_zw, RaceFun;
+		var GetNumber = function (number) {
+			return Math.round(number * 1000) / 1000;
+		}
+		var PlayMap = {
+			"209": '冠军',
+			"210": '冠亚军',
+			"211": '冠亚季军'
+		};
+		var MemberLog = function (GameID) {
+			var $this = this;
+			var MemberInfo = false;
+			var LoginInfo = '52f36e2ab4f559efbc07465c11c7a4cc';
+			var that = $("body");
+			var NowGameID = GameID;
+			var MemberMoney = 0;
+			var MemberMoneyTimer;
+			/*會員金額timer*/
+			this.TimerByMemberMoney = function () {
+				clearTimeout(MemberMoneyTimer);
+				CatchMemberMoney();
+				MemberMoneyTimer = setTimeout(function () {
+					$this.TimerByMemberMoney();
+				}, 10000);
+			}
+			this.StopMoneyTimer = function () {
+				clearTimeout(MemberMoneyTimer);
+			}
+			/*取得會員資料*/
+			var CatchMemberInfo = function () {
+				$.ajax({
+					url: 'https://easy-mock.bookset.io/mock/5dbaca559e606017b5d2c8c5/example/GetMemberInfo',
+					type: "POST",
+					data: false,
+					async: true,
+					dataType: 'html',
+					error: function (xhr) {
+						CatchMemberInfo()
+					},
+					success: function (rt) {
+						var fun = {}
+						fun["100"] = function (obj) {
+							MemberInfo = obj.MemberInfo;
+							that.find("#MemberAct").html(MemberInfo.Name);
+							try {
+								start_loading.ItemComplete("CatchMemberInfo")
+							} catch (e) { }
+						}
+						my_decode(rt, fun);
+					}
+				});
+			}
+			/*取得會員金額*/
+			var CatchMemberMoney = function () {
+				$.ajax({
+					url: 'https://easy-mock.bookset.io/mock/5dbaca559e606017b5d2c8c5/example/GetMemberMoney',
+					type: "POST",
+					data: false,
+					async: true,
+					dataType: 'html',
+					error: function (xhr) { },
+					success: function (rt) {
+						var fun = {}
+						fun["100"] = function (obj) {
+							//MemberMoney = obj.Money;
+							//that.find("#MemberMoney").html(MemberMoney);
+							ShowMoney(obj.Money);
+						}
+						my_decode(rt, fun);
+					}
+				});
+			}
+			var ShowMoney = function (Money) {
+				if (MemberMoney * 1 != Money * 1) {
+					var dif = GetNumber(Money - MemberMoney);
+					var s_m = that.find("#MemberMoney");
+					var s_top = s_m.offset().top;
+					var s_left = s_m.offset().left;
+					if (dif > 0) {
+						var d = $("<div/>").addClass("AddMoneyDiv").css({
+							top: s_top + 50,
+							left: s_left,
+							opacity: 0
+						}).html("+" + dif);
+						that.append(d);
+						d.stop().animate({
+							opacity: 1,
+							top: "-=50",
+						}, 1000, function () {
+							MemberMoney = Money;
+							s_m.html(MemberMoney);
+							d.remove();
+						});
+					} else {
+						MemberMoney = Money;
+						s_m.html(MemberMoney);
+						var d = $("<div/>").addClass("DelMoneyDiv").css({
+							position: "absolute",
+							top: s_top,
+							left: s_left,
+							opacity: 0
+						}).html(dif);
+						that.append(d);
+						d.stop().animate({
+							opacity: 1,
+							top: "+=50",
+						}, 1000, function () {
+							d.remove();
+						});
+					}
+				}
+			}
+			this.GetMemberMoney = function () {
+				return MemberMoney;
+			}
+			this.GetMemberInfo = function () {
+				return MemberInfo;
+			}
+			this.GetLoginInfo = function () {
+				return LoginInfo;
+			}
+			this.reset = function () {
+				CatchMemberInfo();
+				CatchMemberMoney();
+				$this.TimerByMemberMoney();
+			}
+			var init = function () {
+				$this.reset();
+			}
+			init();
+		}
+		var RoomFunction = function () {
+			var $this = this;
+			var that = $("body");
+			var PreSet = "{PreSet}";
+			var PreGameID = "{PreGameID}";
+			var GoGame = function (game_id, game_name) {
+				if ($("body").has("#win_game_" + game_id).length) {
+					var win = $("#win_game_" + game_id);
+					if (win.hasClass("small")) {
+						win.trigger("ToEnlarge");
+						return;
+					}
+					if (win.hasClass("big")) {
+						win.trigger("ToTopNarrow");
+						return;
+					}
+				} else {
+					var obj = AddFooter(game_id, game_name)
+					game_zw.OpenWin({
+						type: "iframe",
+						url: "https://gw.bhe66.com/main/GoGame/" + game_id + "/" + MemLog.GetLoginInfo(),
+						title: game_name,
+						lock: false,
+						width: 1010,
+						height: 872,
+						Classify: "game_" + game_id,
+						id: "win_game_" + game_id,
+						TiedObj: obj,
+						CloseEvent: function () {
+							DelFooter(game_id);
+						}
+					});
+				}
+			}
+
+			/*---------------------------------------------------------------------------------------*/
+			/*開獎結果*/
+			this.GoLottery = function (game_id) {
+				if ($("body").has("#win_GoLottery").length) {
+					var win = $("#win_GoLottery");
+					if (win.hasClass("small")) {
+						win.trigger("ToEnlarge");
+						if (game_id) {
+							open_lottery.CatchGameInfo(game_id);
+							setTimeout(function () {
+								win.trigger("ToTop");
+							}, 100)
+
+						}
+						return;
+					}
+					if (win.hasClass("big")) {
+						win.trigger("ToTopNarrow");
+						if (game_id) {
+							open_lottery.CatchGameInfo(game_id);
+							setTimeout(function () {
+								win.trigger("ToTop");
+							}, 100)
+						}
+						return;
+					}
+				} else {
+					game_zw.OpenWin({
+						type: "iframe",
+						url: "https://gw.bhe66.com/Into/IntoLottery/23/true",
+						title: '<img src="https://gfile.bhe66.com/assets/main/room/images/nav03_icon.png" width="16"> 开奖结果',
+						lock: false,
+						width: 978,
+						height: 600,
+						Classify: "GoLottery",
+						id: "win_GoLottery",
+						TiedObj: $("#GoLottery"),
+						TiedPosition: "center"
+					});
+				}
+			}
+			/*訂單管理*/
+			var GoOrder = function () {
+				if ($("body").has("#win_GoOrder").length) {
+					var win = $("#win_GoOrder");
+					if (win.hasClass("small")) {
+						win.trigger("ToEnlarge");
+						return;
+					}
+					if (win.hasClass("big")) {
+						win.trigger("ToTopNarrow");
+						return;
+					}
+				} else {
+					loading(true);
+					$.ajax({
+						url: 'https://easy-mock.bookset.io/mock/5dbaca559e606017b5d2c8c5/example/Order',
+						type: "POST",
+						data: false,
+						async: true,
+						dataType: 'html',
+						error: function (xhr) {
+							$this.loading(false);
+						},
+						success: function (rt) {
+							var fun = {}
+							fun["100"] = function (obj) {
+								game_zw.OpenWin({
+									type: "html",
+									html: urldecode(obj.view),
+									title: '<img src="https://gfile.bhe66.com/assets/main/room/images/nav01_icon.png" width="16"> 订单管理',
+									lock: false,
+									width: 1200,
+									height: 650,
+									Classify: "GoOrder",
+									id: "win_GoOrder",
+									TiedObj: $("#GoOrder"),
+									TiedPosition: "center"
+								});
+							}
+							my_decode(rt, fun);
+							loading(false);
+						}
+					});
+				}
+			}
+			/*投注報表*/
+			var GoReport = function () {
+				if ($("body").has("#win_GoReport").length) {
+					var win = $("#win_GoReport");
+					if (win.hasClass("small")) {
+						win.trigger("ToEnlarge");
+						return;
+					}
+					if (win.hasClass("big")) {
+						win.trigger("ToTopNarrow");
+						return;
+					}
+				} else {
+					loading(true);
+					$.ajax({
+						url: 'https://easy-mock.bookset.io/mock/5dbaca559e606017b5d2c8c5/example/Report',
+						type: "POST",
+						data: false,
+						async: true,
+						dataType: 'html',
+						error: function (xhr) {
+							$this.loading(false);
+						},
+						success: function (rt) {
+							var fun = {}
+							fun["100"] = function (obj) {
+								game_zw.OpenWin({
+									type: "html",
+									html: urldecode(obj.view),
+									title: '<img src="https://gfile.bhe66.com/assets/main/room/images/nav02_icon.png" width="16"> 投注报表',
+									lock: false,
+									width: 1200,
+									height: 650,
+									Classify: "GoReport",
+									id: "win_GoReport",
+									TiedObj: $("#GoReport"),
+									TiedPosition: "center",
+									OpenEvent: function () {
+										$("#win_GoReport").find('.dpk').datetimepicker({
+											format: "Y-m-d",
+											timepicker: false,
+											defaultTime: '00:00'
+										});
+									}
+								});
+							}
+							my_decode(rt, fun);
+							loading(false);
+						}
+					});
+				}
+			}
+			/*走勢圖*/
+			var GoTrend = function (game_id) {
+				window.open("https://gw.bhe66.com/Into/IntoTrend/23", "TrendWin", "width=1030, height=820");
+			}
+			/*單雙開獎統計*/
+			var GoWayvalue = function () {
+				if ($("body").has("#win_GoWayvalue").length) {
+					var win = $("#win_GoWayvalue");
+					if (win.hasClass("small")) {
+						win.trigger("ToEnlarge");
+						return;
+					}
+					if (win.hasClass("big")) {
+						win.trigger("ToTopNarrow");
+						return;
+					}
+				} else {
+					loading(true);
+					$.ajax({
+						// url: 'https://gw.bhe66.com/Order/ToView/Wayvalue/23',
+						url: 'https://easy-mock.bookset.io/mock/5dbaca559e606017b5d2c8c5/example/Wayvalue',
+						type: "POST",
+						data: false,
+						async: true,
+						dataType: 'html',
+						error: function (xhr) {
+							$this.loading(false);
+						},
+						success: function (rt) {
+							var fun = {}
+							fun["100"] = function (obj) {
+								game_zw.OpenWin({
+									type: "html",
+									html: urldecode(obj.view),
+									title: '<img src="https://gfile.bhe66.com/assets/main/room/images/nav02_icon.png" width="16"> ' + LG.gstr("lang_game_ladder_btn_lot_record"),
+									lock: false,
+									width: 1000,
+									height: 521,
+									Classify: "GoWayvalue",
+									id: "win_GoWayvalue",
+									TiedObj: $("#GoWayvalue"),
+									TiedPosition: "center"
+								});
+							}
+							my_decode(rt, fun);
+							loading(false);
+						}
+					});
+				}
+			}
+			/*遊戲說明*/
+			var GoExplanation = function () {
+				if ($("body").has("#win_GoExplanation").length) {
+					var win = $("#win_GoExplanation");
+					if (win.hasClass("small")) {
+						win.trigger("ToEnlarge");
+						return;
+					}
+					if (win.hasClass("big")) {
+						win.trigger("ToTopNarrow");
+						return;
+					}
+				} else {
+					loading(true);
+					$.ajax({
+						url: 'https://easy-mock.bookset.io/mock/5dbaca559e606017b5d2c8c5/example/Explanation',
+						type: "POST",
+						data: false,
+						async: true,
+						dataType: 'html',
+						error: function (xhr) {
+							$this.loading(false);
+						},
+						success: function (rt) {
+							var fun = {}
+							fun["100"] = function (obj) {
+								game_zw.OpenWin({
+									type: "html",
+									html: urldecode(obj.view),
+									title: '<img src="https://gfile.bhe66.com/assets/main/room/images/nav02_icon.png" width="16"> 游戏说明',
+									lock: false,
+									width: 747,
+									height: 521,
+									Classify: "GoExplanation",
+									id: "win_GoExplanation",
+									TiedObj: $("#GoExplanation"),
+									TiedPosition: "center"
+								});
+							}
+							my_decode(rt, fun);
+							loading(false);
+						}
+					});
+				}
+			}
+			/*---------------------------------------接口含有一个接口--------------开奖统计*/
+			var GoStatistics = function () {
+				if ($("body").has("#win_GoStatistics").length) {
+					var win = $("#win_GoStatistics");
+					if (win.hasClass("small")) {
+						win.trigger("ToEnlarge");
+						return;
+					}
+					if (win.hasClass("big")) {
+						win.trigger("ToTopNarrow");
+						return;
+					}
+				} else {
+					loading(true);
+					$.ajax({
+						url: 'https://easy-mock.bookset.io/mock/5dbaca559e606017b5d2c8c5/example/GoStatistics',
+						type: "POST",
+						data: false,
+						async: true,
+						dataType: 'html',
+						error: function (xhr) {
+							$this.loading(false);
+						},
+						success: function (rt) {
+							var fun = {}
+							fun["100"] = function (obj) {
+								game_zw.OpenWin({
+									type: "html",
+									html: urldecode(obj.view),
+									title: '<img src="https://gfile.bhe66.com/assets/main/room/images/nav02_icon.png" width="16"> 开奖统计',
+									lock: false,
+									width: 747,
+									height: 566,
+									Classify: "GoExplanation",
+									id: "win_GoStatistics",
+									TiedObj: $("#GoStatistics"),
+									TiedPosition: "center"
+								});
+							}
+							my_decode(rt, fun);
+							loading(false);
+						}
+					});
+				}
+			}
+			this.resize = function () {
+				//footerReSize();
+			}
+			var init = function () {
+				$(window).resize(function (event) {
+					$this.resize();
+				});
+				that.find("#GoLottery").click(function () {
+					$this.GoLottery();
+				});
+				that.find("#GoOrder").click(function () {
+					GoOrder();
+				});
+				that.find("#GoReport").click(function () {
+					GoReport();
+				});
+				that.find("#GoTrend").click(function () {
+					GoTrend();
+				});
+				that.find("#GoWayvalue").click(function () {
+					GoWayvalue();
+				});
+				that.find('#GoExplanation').click(function () {
+					GoExplanation();
+				}); GoStatistics
+				that.find("#GoStatistics").click(function () {
+					GoStatistics();
+				});
+			}
+			init();
+		}
+		var OrderFunction = function () {
+			var $this = this;
+			var that;
+			/*訂單詳細資料*/
+			this.GoOrderDetails = function (OrderID) {
+				loading(true);
+				$.ajax({
+					url: 'https://gw.bhe66.com/Order/ToView/Details/' + OrderID,
+					type: "POST",
+					data: false,
+					async: true,
+					dataType: 'html',
+					error: function (xhr) {
+						$this.loading(false);
+					},
+					success: function (rt) {
+						var fun = {}
+						fun["100"] = function (obj) {
+							game_zw.OpenWin({
+								type: "html",
+								html: urldecode(obj.view),
+								title: "投注明细",
+								width: 800,
+								height: 650,
+								Classify: "Details_Content",
+								id: "Details_" + obj.order_id,
+								CanSetsize: false,
+								SetWinsize: false,
+								CanSetMax: false
+							});
+						}
+						my_decode(rt, fun);
+						loading(false);
+					}
+				});
+			}
+			/*訂單內容細單資料*/
+			this.GoBetContentDetails = function (OrderID) {
+				loading(true);
+				$.ajax({
+					url: 'https://gw.bhe66.com/Order/ToView/BetContentDetails/' + OrderID,
+					type: "POST",
+					data: false,
+					async: true,
+					dataType: 'html',
+					error: function (xhr) {
+						$this.loading(false);
+					},
+					success: function (rt) {
+						var fun = {}
+						fun["100"] = function (obj) {
+							game_zw.OpenWin({
+								type: "html",
+								html: urldecode(obj.view),
+								title: "細單資料(" + obj.order_id + ")",
+								lock: false,
+								width: 978,
+								height: 582,
+								Classify: "Details_Content",
+								id: "BetcontentDetails_" + obj.order_id,
+								CanSetsize: false,
+								SetWinsize: false,
+								CanSetMax: false,
+								OpenEvent: function () {
+									setTimeout(function () {
+										try {
+											bet_content.resize();
+										} catch (e) { }
+									}, 500)
+								}
+							});
+						}
+						my_decode(rt, fun);
+						loading(false);
+					}
+				});
+			}
+			/*追號詳細資料*/
+			this.GoChaseDetails = function (ChaseID) {
+				loading(true);
+				$.ajax({
+					url: 'https://gw.bhe66.com/Order/ToView/ChaseDetails/' + ChaseID,
+					type: "POST",
+					data: false,
+					async: true,
+					dataType: 'html',
+					error: function (xhr) {
+						$this.loading(false);
+					},
+					success: function (rt) {
+						var fun = {}
+						fun["100"] = function (obj) {
+							game_zw.OpenWin({
+								type: "html",
+								html: urldecode(obj.view),
+								title: "追号明细(" + obj.ChaseID + ")",
+								width: 660,
+								height: 757,
+								Classify: "ChaseDetails_Content",
+								id: "ChaseDetails_" + obj.ChaseID,
+								CanSetsize: false,
+								CanSetMax: false
+							});
+						}
+						my_decode(rt, fun);
+						loading(false);
+					}
+				});
+			}
+			var init = function () {
+				that = $("body");
+			}
+			init();
+		}
+		var GameControl = function (GameID) {
+			var $this = this;
+			var that = $("body");
+			var NowGameID = GameID;
+			var GameInfo = false;
+			var GamePlayInfo = false;
+			var GameBackWater = false;
+			var NowPeriods = false;
+			/*即時下單資料*/
+			var NowConversionValue = 0;
+			var NowImBetNum = 0;
+			var NowImBetMoney = 0;
+			var NowPlayID = false;
+			var NowBetInfo = false;
+			var GameClose = false;
+			var GamePlayFun;
+			var zw, room = false, room_fun = false;
+			var CatchGameInfo = function () {
+				loading(true);
+				$.ajax({
+					url: 'https://easy-mock.bookset.io/mock/5dbaca559e606017b5d2c8c5/example/GetWebGameInfo',
+					type: "POST",
+					data: {
+						game_id: NowGameID
+					},
+					async: true,
+					dataType: 'html',
+					error: function (xhr) {
+						loading(false);
+					},
+					success: function (rt) {
+						var fun = {}
+						fun["100"] = function (obj) {
+							GameInfo = obj.GameInfo;
+							CreateGameInfo();
+							loading(false);
+						}
+						my_decode(rt, fun);
+					}
+				});
+			}
+			var CreateGameInfo = function () {
+				if (GameInfo == false) { return; }
+				var info = GameInfo;
+				if (info.is_close_all == "Y") {
+					CloseGame()
+					try {
+						start_loading.ItemComplete("GetGamePeriods")
+						start_loading.ItemComplete("CatchGameLottery")
+					} catch (e) { }
+				} else {
+					if (info.is_maintain != "Y") {
+						if (info.hasOwnProperty("play")) {
+							for (var k in info.play) {
+								var v = info.play[k];
+								that.find(".Play_" + v.play_id + "_ods").html(v.odds * 1)
+							}
+						}
+						$this.GetGamePeriods();
+						that.find(".maintain_content").remove();
+						that.find("#GameName").html(info.Name);
+						//CatchGameLottery();
+						$this.GetGameToDayPeriods();
+					} else {
+						that.find(".maintain_content").show();
+						that.find(".game_content").remove();
+					}
+				}
+			}
+			/*抓取當下的期數*/
+			var c_down;
+			this.GetGamePeriods = function () {
+				var url = 'https://easy-mock.bookset.io/mock/5dbaca559e606017b5d2c8c5/example/GetNowGamePeriods';
+				// var url = 'https://gw.bhe66.com/Game/GetNowGamePeriods/';
+				var data = {
+					game_id: NowGameID
+				};
+				ajax_get(url, data).done(function (rt) {
+					var fun = {}
+					fun["100"] = function (obj) {
+						NowPeriods = {};
+						NowPeriods.lottery_id = obj.lottery_id;
+						NowPeriods.Periods = obj.Periods;
+						NowPeriods.PeriodsStr = obj.PeriodsStr;
+						NowPeriods.CloseTime = obj.CloseTime;
+						NowPeriods.PeriodsInfo = obj.PeriodsInfo;
+						CreateGamePeriods();
+						$this.GetGameChangePeriods(NowPeriods.lottery_id);
+						$this.GetOrderDistribution(NowPeriods.lottery_id);
+						$this.GetSnailWin(NowPeriods.lottery_id);
+						c_down = new CountDown({
+							id: ".PeriodsCloseTime",
+							maturity: obj.CloseDateTime,
+							second: obj.Close_second,
+							callback: function (d_time) { },
+							callmaturity: function () {
+								//console.log("我結束了!")
+								that.find("#PeriodsStatus").removeClass("time_icon").addClass("time_icon_out");
+								CatchGameNowLottery(obj.lottery_id);
+								/*
+									過了多少沒有開獎就跳過。
+									setTimeout(function(){
+										$this.GetGamePeriods();
+									}, 10000);
+								*/
+								$('input').each(function () {
+									$(this).trigger('blur');
+								})
+								MemLog.StopMoneyTimer()
+								$this.GetGameChangePeriods(NowPeriods.lottery_id);
+
+								that.find('#MoneyDialog').trigger("Close");
+								SnailGame.play_snd_effect("CloseBet_1")
+								setTimeout(function () {
+									SnailGame.play_snd_effect("CloseBet_2")
+								}, 1000)
+
+								snails.switchbet(true);
+							}
+						});
+					}
+					fun["102"] = function (obj) {
+						CloseGame()
+					}
+					my_decode(rt, fun);
+				}).fail(function () {
+					setTimeout(function () {
+						$this.GetGamePeriods();
+					}, 1000);
+				})
+			}
+			this.GetNowPeriods = function () {
+				return NowPeriods;
+			}
+			/* ------------------------------------------------------有问题,影响投注单期数
+		 /*抓取今天期數*/
+			this.GetGameToDayPeriods = function () {
+				$.ajax({
+					// url: 'https://easy-mock.bookset.io/mock/5dbaca559e606017b5d2c8c5/example/GetGameToDayPeriods',
+					url: 'https://gw.bhe66.com/lot/GetGameToDayPeriods/',
+					type: "POST",
+					data: {
+						GameID: NowGameID
+					},
+					error: function (xhr) { },
+					success: function (rt) {
+						var fun = {}
+						fun["100"] = function (obj) {
+							var list = obj.LotteryInfo;
+							var s_pa = that.find("#advance-number.ToDayPeriods");
+							var s_pb = that.find("#basic-number.ToDayPeriods");
+							s_pa.find("option").remove();
+							s_pb.find("option").remove();
+							for (var i in list) {
+								var info = list[i];
+								s_pa.prepend(
+									$("<option/>").val(info.lottery_id).text(info.periods_str + ' 期')
+								)
+								s_pb.prepend(
+									$("<option/>").val(info.lottery_id).text(info.periods_str + ' 期')
+								)
+							}
+							s_pa.val(obj.NowLotteryID)
+							s_pb.val(obj.NowLotteryID)
+							s_pa.selectmenu("refresh");
+							s_pb.selectmenu("refresh");
+						}
+						my_decode(rt, fun);
+					}
+				});
+			}
+			/*抓取現在開獎號碼*/
+			var CatchGameNowLotteryTimer;
+			var CatchGameNowLottery = function (lottery_id) {
+				$.ajax({
+					// url: 'https://easy-mock.bookset.io/mock/5dbaca559e606017b5d2c8c5/example/GetGameLotteryByLotteryID',
+					url: 'https://gw.bhe66.com/lot/GetGameLotteryByLotteryID/',
+					type: "POST",
+					data: {
+						lottery_id: lottery_id
+					},
+					error: function (xhr) { },
+					success: function (rt) {
+						var fun = {}
+						fun["100"] = function (obj) {
+							that.find("#LotteryCode").html(obj.LotteryCode);
+							that.find('#game-wating').hide();
+							SnailGame.register_after_show_once(function () {
+								snails.ShowWin(obj.LotteryCode);
+								$this.GetGameChangePeriods(lottery_id, true);
+							})
+							SnailGame.push_run_script(obj.Script, obj.LotteryCode)
+						}
+						fun["103"] = function (obj) {
+							CatchGameNowLotteryTimer = setTimeout(function () {
+								CatchGameNowLottery(lottery_id);
+							}, 1000);
+						}
+						my_decode(rt, fun);
+					}
+				});
+			}
+			var CreateGamePeriods = function () {
+				that.find(".NowPeriodsNumber").html(NowPeriods.PeriodsStr);
+				that.find("#NowPeriodsCloseTime").html(NowPeriods.CloseTime);
+				that.find("#PeriodsStatus").removeClass("time_icon_out").addClass("time_icon");
+			}
+			var SendBetFun = function () {
+				if (GameClose) { return; }
+				if (!NowPeriods) { return; }
+				var send = {
+					'GameID': GameInfo.GameID,
+					'BetInfo': []
+				}
+				that.find('.cbet-money').each(function (index, el) {
+					if ($(this).val() == '' || $(this).val() * 1 <= 0) {
+						return
+					}
+					var temp = {};
+					temp.lottery_id = NowPeriods.lottery_id;
+					temp.game_id = GameInfo.GameID;
+					temp.money = $(this).val();
+					temp.cbet = $(this).attr('data-bet_content');
+					temp.play_id = $(this).attr('data-play');
+					temp.bet_location = '';
+					temp.bet_num = 1;
+					temp.total_money = $(this).val();
+					temp.ConversionValue = 0;
+					send.BetInfo.push(temp)
+				});
+				if (send.BetInfo.length < 1) {
+					ZgCreate.alert(LG.gstr("lang_system_msg"), "请先输入下注金额。");
+					return;
+				}
+				var sentbet_sum = 0;
+				for (var i = 0; i < send.BetInfo.length; i++) {
+					sentbet_sum += parseInt(send.BetInfo[i]['money'])
+				}
+				var MemberMoney = MemLog.GetMemberMoney();
+				if (MemberMoney < sentbet_sum) {
+					ZgCreate.alert(LG.gstr("lang_system_msg"), "金额不足");
+					return;
+				}
+				ZgCreate.confirm("确认投注!?", SendConfirmContent(send), {
+					complete: function () {
+						loading(true);
+						$('.cbet-money,.total-Betting').val('0');
+						$.ajax({
+							url: 'https://gw.bhe66.com/Order/MemberForBet/',
+							type: "POST",
+							data: send,
+							async: true,
+							dataType: 'html',
+							error: function (xhr) {
+								loading(false);
+							},
+							success: function (rt) {
+								loading(false);
+								var fun = {}
+								fun["100"] = function (obj) {
+									var err = [];
+									for (var i in obj.re_ary) {
+										var v = obj.re_ary[i];
+										if (v.hasOwnProperty("msg")) {
+											err.push(v.msg)
+										}
+									}
+									var msg = LG.gstr("lang_game_bet_success", {
+										number: obj.bet_number,
+										success_number: obj.bet_success_number,
+										err_number: obj.bet_number - obj.bet_success_number
+									});
+									for (var i in err) {
+										if (err.hasOwnProperty(i)) {
+											msg += '<div>' + err[i] + '</div>';
+										}
+									}
+									ZgCreate.alert(LG.gstr("lang_system_msg"), msg);
+									$this.GetGameChangePeriods(NowPeriods.lottery_id);
+									$this.GetOrderDistribution(NowPeriods.lottery_id);
+									MemLog.reset();
+									/*mem_bet_order.CatchOrderInfo();*/
+									try {
+										parent.MemLog.reset();
+									} catch (e) { }
+								}
+								fun["102"] = function (obj) {
+									ZgCreate.alert(LG.gstr("lang_system_msg"), "此期数已过期。");
+								}
+								fun["666"] = function (obj) {
+									ZgCreate.alert("系统讯息", "错误代码。(666)");
+								}
+								my_decode(rt, fun);
+							}
+						});
+						$(this).trigger("Close");
+					}
+				});
+			}
+			/*送出前的確認資料*/
+			var SendConfirmContent = function (betdata) {
+				var snailmap = { 1: '红', 2: '绿', 3: '蓝', 123: '红绿蓝', 132: '红蓝绿', 213: '绿红蓝', 231: '绿蓝红', 312: '蓝红绿', 321: '蓝绿红' }
+				var Periods = NowPeriods;
+				var PeriodsStr = Periods.PeriodsStr;
+				var bet_total = GetTotalBetInfo();
+				var bet_num = bet_total.bet_num;
+				var bet_money = bet_total.bet_money;
+				var data = '';
+				var content = $("<div/>").css({
+					"line-height": "28px",
+					"border": "1px solid #e4e4e4",
+					"border-radius": "4px",
+					"display": "inline-block"
+				})
+				content.append(
+					$("<div/>").addClass("confirm-tr").append(
+						$("<div/>").addClass("confirm-td").html('下注期数')
+					).append(
+						$("<div/>").addClass('confirm-td').html(PeriodsStr + '&nbsp;期')
+					)
+				)
+				for (var i in betdata.BetInfo) {
+					content.append(
+						$("<div/>").addClass('confirm-tr').append(
+							$("<div/>").addClass("confirm-td").html(PlayMap[betdata.BetInfo[i].play_id])
+						).append(
+							$("<div/>").addClass("confirm-td").html(snailmap[betdata.BetInfo[i].cbet.replace(/,/g, "")])
+						).append(
+							$("<div/>").addClass("confirm-td").html(betdata.BetInfo[i].money + '&nbsp;元')
+						)
+					)
+				}
+				content.append(data)
+				return content;
+			}
+			/*取得準備資料總金額、總注數*/
+			var GetTotalBetInfo = function () {
+				var info = {};
+				info.bet_num = 0;
+				info.bet_money = 0;
+				for (var k in NowBetInfo) {
+					if (NowBetInfo.hasOwnProperty(k)) {
+						var v = NowBetInfo[k];
+						info.bet_num = info.bet_num.add(v.bet_num);
+						info.bet_money = info.bet_money.add(v.total_money);
+					}
+				}
+				return info;
+			}
+			/*抓取投注資料*/
+			this.GetGameChangePeriods = function (LotteryID, GameEnd) {
+				that.find(".ToDayPeriods").val(LotteryID);
+				var text = that.find("select[name='basic_ToDayPeriods'] :selected").text();
+				if (text == "") {
+					setTimeout(function () {
+						var text = that.find("select[name='basic_ToDayPeriods'] :selected").text();
+						$(".ui-selectmenu-text").html(text);
+						that.find(".BetInfoForNow").html(text);
+					}, 1000)
+				} else {
+					$(".ui-selectmenu-text").html(text);
+					that.find(".BetInfoForNow").html(text);
+				}
+				$.ajax({
+					url: 'https://easy-mock.bookset.io/mock/5dbaca559e606017b5d2c8c5/example/GetOrderInfoByLotteryID',
+					type: "POST",
+					data: {
+						GameID: NowGameID,
+						lottery_id: LotteryID,
+						status: "not_cancel"
+					},
+					error: function (xhr) { },
+					success: function (rt) {
+						var fun = {}
+						var lottery_content = {}
+						fun["100"] = function (obj) {
+							that.find(".BetMoney").html(0);
+							if (obj.hasOwnProperty("BetContentMoney")) {
+								var BM = obj.BetContentMoney;
+								for (var k in BM) {
+									for (var kk in BM[k]) {
+										that.find(".Play_" + k + "_" + kk + "_money").html(number_format(BM[k][kk]))
+									}
+								}
+							}
+							var money = obj.BetTotal.TotalBetMoney + "";
+							var m = money.split(".");
+							var n = 0;
+							if (m.length > 1) {
+								n = m[1].length;
+							}
+							that.find(".TotalBetMoney").html(number_format(obj.BetTotal.TotalBetMoney, n));
+							var money = obj.BetTotal.real_pl + "";
+							var m = money.split(".");
+							var n = 0;
+							if (m.length > 1) {
+								n = m[1].length;
+							}
+							that.find(".TotalWinMoney").html(number_format(obj.BetTotal.real_pl, n));
+						}
+						fun["101"] = function (obj) {
+							that.find(".BetMoney").html(0);
+						}
+						rt = JSON.stringify(rt)
+						my_decode(rt, fun);
+						if (GameEnd) {
+							MemLog.TimerByMemberMoney()
+							setTimeout(function () {
+								$this.GetGamePeriods();
+								snails.switchbet(false);
+							}, 3000)
+						}
+					}
+				});
+			}
+			this.reset_game = function (GameID) {
+				c_down.clear_timer();
+				NowGameID = GameID;
+				CatchGameInfo();
+			}
+			/*今日胜率*/
+			this.GetSnailWin = function (lottery_id) {
+				$.ajax({
+					url: 'https://easy-mock.bookset.io/mock/5dbaca559e606017b5d2c8c5/example/GetSnailWin',
+					type: "POST",
+					data: {
+						GameID: NowGameID,
+						lottery_id: lottery_id
+					},
+					error: function (xhr) { },
+					success: function (rt) {
+						var fun = {}
+						fun["100"] = function (obj) {
+							console.log(111111)
+							var info = obj.GetInfo;
+							console.log(info)
+							if (info.hasOwnProperty("Snail_1_pro")) {
+								console.log('有')
+								var p = info.Snail_1_pro * 1;
+								that.find(".win_Snail_1").each(function (i) {
+									RunNumber($(this), p)
+								})
+							}
+							if (info.hasOwnProperty("Snail_2_pro")) {
+								var p = info.Snail_2_pro * 1;
+								that.find(".win_Snail_2").each(function (i) {
+									RunNumber($(this), p)
+								})
+							}
+							if (info.hasOwnProperty("Snail_3_pro")) {
+								var p = info.Snail_3_pro * 1;
+								that.find(".win_Snail_3").each(function (i) {
+									RunNumber($(this), p)
+								})
+							}
+						}
+						rt = JSON.stringify(rt)
+						my_decode(rt, fun);
+					}
+				});
+			}
+			/*分怖、胜率 - 跑%*/
+			var RunNumber = function (d, p) {
+				var Timer;
+				var n = d.attr("data-num") * 1;
+				Timer = setInterval(function () {
+					if (n == p) {
+						clearInterval(Timer);
+						d.attr("data-num", n)
+					} else {
+						if (n < p) {
+							n++;
+						} else {
+							n--
+						}
+						d.html(n + "%");
+					}
+				}, 10);
+			}
+			/*抓取购买分布*/
+			var GetOrderDistributionTimer;
+			this.GetOrderDistribution = function (lottery_id) {
+				clearTimeout(GetOrderDistributionTimer)
+				$.ajax({
+					url: 'https://easy-mock.bookset.io/mock/5dbaca559e606017b5d2c8c5/example/GetSnailRaceOrderDistribution',
+					type: "POST",
+					data: {
+						GameID: NowGameID,
+						lottery_id: lottery_id
+					},
+					error: function (xhr) { },
+					success: function (rt) {
+						var fun = {}
+						fun["100"] = function (obj) {
+							if (obj.hasOwnProperty("Snail_1_proportion")) {
+								var p = obj.Snail_1_proportion * 1;
+								that.find('.bar-inner-1').css('width', p + '%');
+								that.find(".Distribution_Snail_1").each(function (i) {
+									RunNumber($(this), p)
+								})
+							}
+							if (obj.hasOwnProperty("Snail_2_proportion")) {
+								var p = obj.Snail_2_proportion * 1;
+								that.find('.bar-inner-2').css('width', p + '%');
+								that.find(".Distribution_Snail_2").each(function (i) {
+									RunNumber($(this), p)
+								})
+							}
+							if (obj.hasOwnProperty("Snail_3_proportion")) {
+								var p = obj.Snail_3_proportion * 1;
+								that.find('.bar-inner-3').css('width', p + '%');
+								that.find(".Distribution_Snail_3").each(function (i) {
+									RunNumber($(this), p)
+								})
+							}
+						}
+						rt = JSON.stringify(rt)
+						my_decode(rt, fun);
+					}
+				});
+				GetOrderDistributionTimer = setTimeout(function () {
+					$this.GetOrderDistribution(lottery_id)
+				}, 10 * 1000)
+			}
+			var CloseGame = function () {
+				GameClose = true;
+				that.find(".game_close_content").show();
+			}
+			var init = function () {
+				//inIframe()
+				if (false) {
+					zw = parent.zw;
+					room = parent;
+					room_fun = parent.room;
+				} else {
+					zw = game_zw;
+					room = false;
+					room_fun = false;
+				}
+				CatchGameInfo();
+				that.find(".BetBtn").click(function () {
+					SendBetFun();
+				})
+			};
+			init();
+		};
+		var MemLog, room, OrderFun, RaceFun, snails;
+		var gcd = document.querySelector("#GameCanvasDiv")
+		var SnailGame = SnailRace(document.querySelector("#GameCanvasDiv"))
+		$(SnailGame.el).css({
+			// transform:"scale(1.025)",
+			display: "table",
+			margin: "0 auto",
+		})
+		$(gcd).css("margin-top", "60px")
+		var progress_span = $('.progress-bar span')
+		SnailGame.register_progress(function (progress) {
+			progress_span.css("width", progress + "%")
+		})
+		SnailGame.ready(LoadingSnailGame)
+		function LoadingSnailGame() {
+			setTimeout(function () {
+				SnailGame.vod_play_eff(true)
+				//console.log("Loading - Complete")
+			}, 500)
+			game_zw = new ZgWindow();
+			MemLog = new MemberLog("23");
+			room = new RoomFunction();
+			OrderFun = new OrderFunction()
+			game_gontrol = new GameControl("23");
+			$("#game-head").show();
+			snails = new snail();
+			$('#splash').hide()
+		}
+		var snail = function () {
+			var $this = this;
+			var that = $('body');
+			this.ResetBetInput = function () {
+				$('.cbet-money,.total-Betting').val("0");
+			}
+			this.reset = function () {
+				NowBetInfo = [];
+				that.find('.cbet-money,.total-Betting').val("0");
+			}
+			var gamemodeswitch = function () {
+				var basicmode = that.find('#game-basic');
+				basicmode.animate({
+					'margin-bottom': 0
+				}, 300, function () {
+					basicmode.addClass('active game-animated game-bounce');
+				});
+
+				that.find('.game-mode-switch').each(function (index, el) {
+					$(this).click(function (event) {
+						SnailGame.play_snd_effect("Change")
+						nowmode = that.find('.game-mode.active');
+						newmode = nowmode.siblings('.game-mode');
+						nowmode.removeClass('active game-animated game-bounce').animate({
+							'margin-bottom': -(nowmode.height())
+						}, 400);
+						newmode.addClass('active').animate({
+							'margin-bottom': 0
+						}, 400, function () {
+							newmode.addClass('game-animated game-bounce');
+						});
+						$this.ResetBetInput()
+					});
+				});
+			}
+			var soundswitch = function () {
+				that.find('.sound-switch').attr('data-original-title', '背景音乐 / 开启').click(function (event) {
+					$(this).toggleClass('active');
+					if ($(this).hasClass('active')) {
+						$(this).attr('data-original-title', '背景音乐 / 开启');
+						that.find('#' + $(this).attr('aria-describedby') + ' .tooltip-inner').html('背景音乐 / 开启');
+						SnailGame.vod_play_bg(true);
+					} else {
+						$(this).attr('data-original-title', '背景音乐 / 关闭');
+						that.find('#' + $(this).attr('aria-describedby') + ' .tooltip-inner').html('背景音乐 / 关闭');
+						SnailGame.vod_play_bg(false);
+					}
+				});
+
+				that.find('.sound-effects').addClass('active').attr('data-original-title', '音效 / 开启').click(function (event) {
+					$(this).toggleClass('active');
+					if ($(this).hasClass('active')) {
+						$(this).attr('data-original-title', '音效 / 开启');
+						that.find('#' + $(this).attr('aria-describedby') + ' .tooltip-inner').html('音效 / 开启');
+						SnailGame.vod_play_eff(true);
+					} else {
+						$(this).attr('data-original-title', '音效 / 关闭');
+						that.find('#' + $(this).attr('aria-describedby') + ' .tooltip-inner').html('音效 / 关闭');
+						SnailGame.vod_play_eff(false);
+					}
+				});
+			}
+			this.switchbet = function (on) {
+				var nowbet = that.find('.game-mode.active');
+				var betinfo = that.find('#game-betinfo');
+				var betbar = that.find('#game-wating');
+				SnailGame.play_snd_effect("Change");
+				if (on) {
+					nowbet.removeClass('game-animated game-bounce').animate({
+						'margin-bottom': -(nowbet.height())
+					}, 400);
+					betinfo.animate({
+						'margin-bottom': 0
+					}, 400, function () {
+						betinfo.addClass('game-animated game-bounce');
+					});
+
+					if (!betbar.is(":visible")) {
+						betbar.fadeIn(300);
+					}
+				} else {
+					betinfo.removeClass('game-animated game-bounce').animate({
+						'margin-bottom': -(betinfo.height())
+					}, 400);
+					nowbet.animate({
+						'margin-bottom': 0
+					}, 400, function () {
+						nowbet.addClass('game-animated game-bounce');
+					});
+				}
+			}
+			var titletip = function () {
+				that.find('[data-toggle="tooltip"]').tooltip()
+			}
+			var WinImage = {
+				"1": $("<i/>").addClass("snails snails-snailA"),
+				"2": $("<i/>").addClass("snails snails-snailB"),
+				"3": $("<i/>").addClass("snails snails-snailC"),
+			};
+			this.ShowWin = function (Ranking) {
+				var ary = Ranking.split(",");
+				var podium = that.find("#game-podium");
+				var mask = that.find('#game-mask')
+				for (var i in ary) {
+					podium.find(".Win_" + ((i * 1) + 1)).html(WinImage[ary[i]])
+				}
+				podium.fadeIn(300);
+				mask.fadeIn(300);
+				SnailGame.play_snd_effect("Win")
+				setTimeout(function () {
+					podium.fadeOut(300);
+					mask.fadeOut(300);
+				}, 5000)
+			}
+			var init = function () {
+				gamemodeswitch();
+				soundswitch();
+				titletip();
+				$(".ToDayPeriods").selectmenu({
+					change: function (event, ui) {
+						$(this).val(ui.item.value);
+						game_gontrol.GetGameChangePeriods(ui.item.value)
+					}
+				});
+				var first = false;
+				that.find('.ui-selectmenu-button').click(function () {
+					var f = $(this).parent();
+					var menu = $("ul[aria-labelledby='" + $(this).attr("id") + "']");
+					if (!first) {
+						menu.mCustomScrollbar({
+							theme: "dark-3"
+						});
+					}
+					var index = f.find("select :selected").index();
+					var li_id = menu.find(".mCSB_container li:eq(" + index + ")").attr("id");
+					menu.mCustomScrollbar("scrollTo", "#" + li_id, {
+						scrollInertia: 0
+					});
+				});
+
+				$this.reset();
+				that.find(".ResetBet").click(function () {
+					$this.ResetBetInput()
+				});
+				that.find(".numf").keyup(function (event) {
+					var map = "0123456789"
+					var val = this.value
+					var chkv = val.toLowerCase()
+					for (var i = 0; i < chkv.length; i++) {
+						var chr = chkv.charAt(i)
+						if (map.indexOf(chr) == -1) {
+							val = val.replace(chr, "")
+						}
+					}
+					if (chkv.charAt(0) == "0") {
+						if (chkv.charAt(1) != ".") {
+							val = val.replace(chkv.charAt(0), "")
+						}
+					}
+					if (val == "") { val = 0 }
+					this.value = val
+				})
+				that.find('.cbet-money').keyup(function (event) {
+					var bet_sum = 0;
+					that.find('.cbet-money').each(function (index, el) {
+						if (!isNaN(parseInt($(this).val()))) {
+							bet_sum += parseInt($(this).val())
+						}
+					})
+					that.find('.total-Betting').val(bet_sum);
+				});
+				that.find(".ButtonAudio").mouseenter(function () {
+					SnailGame.play_snd_effect("Button")
+				});
+
+				/*快速選取金額*/
+				var now_focus;
+				var min_money = 0;
+				var max_money = 10000;
+				that.find("#MoneyDialog").bind("Close", function () {
+					$(this).stop(true, true).delay(200).fadeOut(200)
+				})
+				that.find('.cbet-money').focus(function () {
+					var d = that.find("#MoneyDialog");
+					var d_height = 191 + 15;
+					var d_width = 100 / 2;
+					var m_width = $(this).outerWidth() / 2;
+					var d_top = $(this).offset().top;
+					var d_left = $(this).offset().left;
+					d.css({
+						top: d_top - d_height,
+						left: d_left + m_width - d_width
+					}).stop(true, true).delay(200).fadeIn(200)
+					now_focus = $(this);
+				});
+
+				that.find("#MoneyDialog .minus").click(function () {
+					var n_money = now_focus.val() * 1;
+					var t_money = $(this).attr("data-money") * 1;
+					var next_money = n_money - t_money;
+					if (next_money < min_money) {
+						next_money = min_money;
+					}
+					now_focus.val(next_money).trigger("keyup");
+				})
+				that.find("#MoneyDialog .plus").click(function () {
+					var n_money = now_focus.val() * 1;
+					var t_money = $(this).attr("data-money") * 1;
+					var next_money = n_money + t_money;
+					if (next_money > max_money) {
+						next_money = max_money;
+					}
+					now_focus.val(next_money).trigger("keyup");
+				})
+				$(document).click(function (event) {
+					var d = that.find("#MoneyDialog");
+					var eobj = $(event.target);
+					if (
+						eobj.attr('id') == d.attr("id") || eobj.closest("#" + d.attr("id")).length > 0 || eobj.hasClass("cbet-money")
+					) {
+						return
+					}
+					d.trigger("Close");
+				});
+			}
+			init()
+		}
+
+	</script>
+</body>
+
+</html>
