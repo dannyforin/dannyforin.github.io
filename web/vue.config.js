@@ -8,7 +8,7 @@ module.exports = {
       plugins: [
         new PrerenderSPAPlugin({
           staticDir: path.join(__dirname, 'dist'),
-          routes: ['/', '/home', '/detail/308', '/detail/305'],
+          routes: ['/', '/home', '/detail/308', '/detail/356'],
           renderer: new Renderer({
             inject: {
               foo: 'bar'
