@@ -11,6 +11,7 @@ const routes = [
 ]
 
 export default new Router({
-  routes: routes,
-  mode: history
+  mode: 'history',
+  base: process.env.BASE_URL,
+  routes
 })

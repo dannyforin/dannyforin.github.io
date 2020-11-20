@@ -2,6 +2,7 @@
   <div id="app">
     <router-view />
     <span>this is app / page</span>
+    <router-link to="/home">跳转home</router-link>
   </div>
 </template>
 
