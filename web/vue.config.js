@@ -8,13 +8,12 @@ module.exports = {
       plugins: [
         new PrerenderSPAPlugin({
           staticDir: path.join(__dirname, 'dist'),
-          routes: ['/', '/home'],
+          routes: ['/', '/home', '/detail/308', '/detail/305'],
           renderer: new Renderer({
             inject: {
               foo: 'bar'
             },
             headless: false,
-            renderAfterTime: 20000,
             renderAfterDocumentEvent: 'render-event'
           })
         })
