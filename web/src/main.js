@@ -7,5 +7,10 @@ import './utils/antd'
 
 new Vue({
   router,
-  render: h => h(App)
+  render: h => h(App),
+  mounted() {
+    setTimeout(() => {
+      document.dispatchEvent(new Event('render-event'))
+    }, 20000)
+  }
 }).$mount('#app')
