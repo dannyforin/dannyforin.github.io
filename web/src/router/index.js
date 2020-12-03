@@ -12,6 +12,9 @@ const routes = [
     path: '/detail/:id',
     name: 'home',
     component: () => import('../views/detail')
+  },
+  {
+    hello
   }
 ]
 
