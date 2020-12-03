@@ -2,6 +2,9 @@
   <div class="detail">
     <p>数据页面</p>
     <div v-for="(item, index) in list" :key="index">{{ item.name }} + {{ item.id }}</div>
+    <div class="main">
+      <div class="mian-container"></div>
+    </div>
   </div>
 </template>
 
